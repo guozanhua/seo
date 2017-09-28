@@ -79,8 +79,8 @@ public class SeoService {
      */
     public void addMapping(final AddedNodeFact node, final String locale, final String url, final boolean isDefault,
                            KnowledgeHelper drools) throws RepositoryException {
-        if (logger.isInfoEnabled()) {
-            logger.info("\n\nAdding URL mapping for node " + node.getPath() + " and locale '" + locale + "'\n\n");
+        if (logger.isDebugEnabled()) {
+            logger.debug("Adding URL mapping for node " + node.getPath() + " and locale '" + locale + "'");
         }
         final String path = node.getPath();
         String urlToTry = url;
