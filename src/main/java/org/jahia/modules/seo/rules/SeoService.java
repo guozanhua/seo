@@ -50,6 +50,7 @@ import org.jahia.services.content.rules.AddedNodeFact;
 import org.jahia.services.seo.VanityUrl;
 import org.jahia.services.seo.jcr.VanityUrlService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import javax.validation.ConstraintViolationException;
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class SeoService {
 
-    private static Logger logger = org.slf4j.LoggerFactory.getLogger(SeoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SeoService.class);
 
     private VanityUrlService urlService;
 
@@ -79,9 +80,7 @@ public class SeoService {
      */
     public void addMapping(final AddedNodeFact node, final String locale, final String url, final boolean isDefault,
                            KnowledgeHelper drools) throws RepositoryException {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Adding URL mapping for node " + node.getPath() + " and locale '" + locale + "'");
-        }
+        logger.debug("Adding URL mapping for node {} and locale {}", node.getPath(), locale);
         final String path = node.getPath();
         String urlToTry = url;
         int index = 0;
@@ -107,9 +106,7 @@ public class SeoService {
      */
     public void removeMappings(final AddedNodeFact node, final String locale, KnowledgeHelper drools)
             throws RepositoryException {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Removing URL mappings for locale '" + locale + "' from node " + node.getPath());
-        }
+        logger.debug("Removing URL mappings for locale {} from node {}", locale, node.getPath());
         urlService.removeVanityUrlMappings(node.getNode(), locale);
     }
 
@@ -145,10 +142,10 @@ public class SeoService {
             } while (true);
             if (changed) {
                 node.setProperty("j:url", url);
-                urlService.flushCacheEntry(urlService.getCacheByUrlKey(url,node.getResolveSite().getSiteKey(), node.getSession().getWorkspace().getName()));
+                urlService.flushCacheEntry(urlService.getCacheByUrlKey(url, node.getResolveSite().getSiteKey(), node.getSession().getWorkspace().getName()));
             }
         } catch (RepositoryException e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
         }
     }
 
