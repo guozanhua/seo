@@ -28,7 +28,7 @@
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program. If not, see <http://www.gnu.org/licenses/>.
+        along with this program. If not, see <http://www.gnu.org/licenses />.
 
 
         2/ JSEL - Commercial and Supported Versions of the program
@@ -52,7 +52,7 @@
         <version>7.1.0.0</version>
     </parent>
     <artifactId>seo</artifactId>
-	<version>7.1.2-SNAPSHOT</version>
+	<version>7.1.2</version>
     <packaging>bundle</packaging>
     <name>Jahia SEO</name>
     <description>Jahia module that provides SEO-friendly URL mapping for content.</description>
@@ -60,7 +60,7 @@
         <connection>scm:git:git@github.com:Jahia/seo.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/seo.git</developerConnection>
         <url>scm:git:git@github.com:Jahia/seo.git</url>
-      <tag>HEAD</tag>
+      <tag>7_1_2</tag>
   </scm>
 
     <properties>
