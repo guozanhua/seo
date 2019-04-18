@@ -8,6 +8,7 @@
  - j:url (string) mandatory nofulltext
  - j:default (boolean) mandatory nofulltext
  - j:active (boolean) nofulltext
+ - j:file (boolean) indexed=no
 
 [jnt:vanityUrls] > nt:base, mix:lastModified, jmix:lastPublished, mix:versionable orderable 
  + * (jnt:vanityUrl)
