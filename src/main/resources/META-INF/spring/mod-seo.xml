@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.eclipse.org/gemini/blueprint/schema/blueprint"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.eclipse.org/gemini/blueprint/schema/blueprint http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">
 
     <bean class="org.jahia.services.content.rules.ModuleGlobalObject">
         <property name="globalRulesObject">
@@ -16,4 +18,16 @@
             </map>
         </property>
     </bean>
+
+    <bean id="vanityUrlServiceOsgi" class="org.jahia.modules.seo.rules.VanityUrlServiceImpl">
+        <property name="vanityUrlManager" ref="vanityUrlManagerOsgi"/>
+        <property name="cacheService" ref="JahiaCacheService"/>
+        <property name="urlResolverListener" ref="urlResolverListener"/>
+    </bean>
+
+    <osgi:service ref="vanityUrlServiceOsgi" interface="org.jahia.services.seo.jcr.VanityUrlServiceInterface"/>
+
+    <bean id="vanityUrlManagerOsgi" class="org.jahia.modules.seo.rules.VanityUrlManagerImpl"/>
+
+    <osgi:service ref="vanityUrlManagerOsgi" interface="org.jahia.services.seo.jcr.VanityUrlManagerInterface"/>
 </beans>
