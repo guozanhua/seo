@@ -60,7 +60,7 @@
         <connection>scm:git:git@github.com:Jahia/seo.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/seo.git</developerConnection>
         <url>scm:git:git@github.com:Jahia/seo.git</url>
-      <tag>HEAD</tag>
+      <tag>7_1_x</tag>
   </scm>
 
     <properties>
