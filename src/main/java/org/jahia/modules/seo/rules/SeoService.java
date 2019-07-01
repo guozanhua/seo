@@ -54,6 +54,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -112,6 +113,7 @@ public class SeoService {
 
     public void checkVanityUrl(final AddedNodeFact newSeo, KnowledgeHelper drools) {
         JCRNodeWrapper node = newSeo.getNode();
+        logger.debug("VANITY CHECK: start vanity check for node: " + node.getPath());
         try {
             String url = node.getProperty("j:url").getString();
             List<VanityUrl> result;
@@ -132,8 +134,16 @@ public class SeoService {
 
             boolean changed = false;
             do {
-                result = urlService.findExistingVanityUrls(url, node.getResolveSite().getSiteKey(), node.getSession().getWorkspace().getName());
-                if (result.size() > (changed ? 0 : 1)) {
+                result = new ArrayList<>();
+                for (VanityUrl existingVanityUrl : urlService.findExistingVanityUrls(url, node.getResolveSite().getSiteKey(), node.getSession().getWorkspace().getName())) {
+                    // filter the results to avoid getting the currently added vanity that triggered this rule.
+                    if (!existingVanityUrl.getPath().equals(node.getPath())) {
+                        result.add(existingVanityUrl);
+                    }
+                }
+
+                logger.debug("VANITY CHECK: check url: " + url + ", found " + result.size());
+                if (result.size() > 0) {
                     url = baseurl + "-" + (i++) + ext;
                     changed = true;
                 } else {
@@ -142,6 +152,7 @@ public class SeoService {
             } while (true);
             if (changed) {
                 node.setProperty("j:url", url);
+                logger.debug("VANITY CHECK: Vanity URL automatically changed for: " + url + " on node: " + node.getPath());
                 urlService.flushCacheEntry(urlService.getCacheByUrlKey(url, node.getResolveSite().getSiteKey(), node.getSession().getWorkspace().getName()));
             }
         } catch (RepositoryException e) {
