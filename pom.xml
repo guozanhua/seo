@@ -52,7 +52,7 @@
         <version>7.1.0.0</version>
     </parent>
     <artifactId>seo</artifactId>
-	<version>7.1.3-SNAPSHOT</version>
+	<version>7.1.4-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>Jahia SEO</name>
     <description>Jahia module that provides SEO-friendly URL mapping for content.</description>
