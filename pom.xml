@@ -54,7 +54,7 @@
     </parent>
 
     <artifactId>seo</artifactId>
-    <version>7.2.0</version>
+    <version>7.2.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>Jahia SEO</name>
     <description>Jahia module that provides SEO-friendly URL mapping for content.</description>
@@ -63,7 +63,7 @@
         <connection>scm:git:git@github.com:Jahia/seo.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/seo.git</developerConnection>
         <url>scm:git:git@github.com:Jahia/seo.git</url>
-        <tag>7_2_0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
